@@ -29,23 +29,44 @@ main{
 .MuiGrid-container{
   align-items: center;
   justify-content: center;
-  margin: 12px;
+  margin: 6px;
 
 }
+
 .MuiGrid-root{
-  padding: 3px;
+  padding: 6px;
 }
 .login-page{
   display: flex;
   align-items: center;
   justify-content: center;
-}
-.evento-page{
-}
-.login-page{
   height: 100vh;
   background-color: white;
 }
+.evento-page{
+}
 
-@media (prefers-reduced-motion: no-preference) {
+.datagrid-content{
+  width: calc(100vw - 165px);
+}
+
+@media screen and (max-width: 600px) {
+  .datagrid-content{
+    width: calc(100vw - 120px);
+    padding: 0;
+    margin: 0;
+  }
+  .MuiGrid-container{
+    margin: 3px;
+  
+  }
+  
+  .MuiGrid-root{
+    padding: 3px;
+  }
+}
+@media screen and (min-width: 601px) and (max-width: 1200px) {
+
+}
+@media screen and (min-width: 1201px) {
 }

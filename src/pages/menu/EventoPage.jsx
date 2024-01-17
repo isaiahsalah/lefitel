@@ -2,9 +2,11 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { LineChart } from "@mui/x-charts/LineChart";
+import { DataGrid } from "@mui/x-data-grid";
 
-import logo from "../../assets/images/logo.png";
+import errorPng from "../../assets/images/error.png";
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -12,23 +14,19 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { Add } from "@mui/icons-material";
+import { Add, WhereToVote } from "@mui/icons-material";
+import {
+  columnsData,
+  markersData,
+  pData,
+  rowsData,
+  timeData,
+  uData,
+} from "../../data/example";
 const customIcon = new Icon({
-  iconUrl: logo,
-  iconSize: [38, 38],
+  iconUrl: errorPng,
+  iconSize: [28, 28],
 });
-const uData = [40, 30, 20, 27, 18, 23, 34];
-const pData = [24, 13, 98, 39, 48, 38, 43];
-
-const time = [
-  new Date(2015, 1, 0),
-  new Date(2015, 2, 0),
-  new Date(2015, 3, 0),
-  new Date(2015, 4, 0),
-  new Date(2015, 5, 0),
-  new Date(2015, 6, 0),
-  new Date(2015, 7, 0),
-];
 const EventoPage = () => {
   return (
     <Grid container alignItems={"stretch"} className="evento-page">
@@ -45,7 +43,7 @@ const EventoPage = () => {
               color="text.secondary"
               gutterBottom
             >
-              Eventos Pendientes
+              Pendientes
               <hr />
             </Typography>
 
@@ -69,9 +67,14 @@ const EventoPage = () => {
             >
               <hr />
             </Typography>
-            <Button startIcon={<Add />} variant="contained">
-              añadir
-            </Button>
+            <CardActions style={{ padding: 0 }}>
+              <Button fullWidth startIcon={<Add />} variant="contained">
+                solucionar
+              </Button>
+              <Button fullWidth startIcon={<Add />} variant="contained">
+                añadir
+              </Button>
+            </CardActions>
           </CardContent>
         </Card>
       </Grid>
@@ -84,7 +87,7 @@ const EventoPage = () => {
               color="text.secondary"
               gutterBottom
             >
-              Eventos Pendientes
+              Histórico
             </Typography>
             <hr />
             <LineChart
@@ -96,9 +99,9 @@ const EventoPage = () => {
               xAxis={[
                 {
                   scaleType: "time",
-                  data: time,
-                  min: time[0].getTime(),
-                  max: time[time.length - 1].getTime(),
+                  data: timeData,
+                  min: timeData[0].getTime(),
+                  max: timeData[timeData.length - 1].getTime(),
                 },
               ]}
               sx={{
@@ -123,6 +126,41 @@ const EventoPage = () => {
         </Card>
       </Grid>
       <Grid item xs={12}>
+        <Card variant="outlined" style={{}}>
+          <CardContent style={{}}>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              Detalle
+              <hr />
+            </Typography>
+            <Box>
+              <DataGrid
+                className="datagrid-content"
+                rowHeight={34}
+                rows={rowsData}
+                columns={columnsData}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 7,
+                    },
+                  },
+                }}
+                pageSizeOptions={[7]}
+                checkboxSelection
+                disableRowSelectionOnClick
+              />
+            </Box>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+      </Grid>
+      <Grid item xs={12}>
         <Card variant="outlined">
           {" "}
           <CardContent>
@@ -131,30 +169,28 @@ const EventoPage = () => {
               color="text.secondary"
               gutterBottom
             >
-              Eventos Pendientes
+              Eventos Pendientes en mapa
+              <hr />
             </Typography>
-            <Typography
-              variant="h3"
-              fontWeight={"bold"}
-              color="text.secondary"
-              component="div"
-            >
-              513
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              postes
-            </Typography>
-            <MapContainer
-              center={[-17.82594, -63.166498]}
-              zoom={13}
-              scrollWheelZoom={false}
-            >
+            <MapContainer center={[-17.82594, -63.166498]} zoom={6}>
               <TileLayer url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png" />
-              <Marker position={[-17.82594, -63.166498]} icon={customIcon}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
+              {markersData.map((mark, i) => (
+                <Marker key={i} position={mark} icon={customIcon}>
+                  <Popup>
+                    <Grid container flexDirection={"column"} gap={1}>
+                      Este es un popup del marker
+                      <Button
+                        size="small"
+                        startIcon={<WhereToVote />}
+                        variant="contained"
+                        fullWidth
+                      >
+                        solucionar
+                      </Button>
+                    </Grid>
+                  </Popup>
+                </Marker>
+              ))}
             </MapContainer>
           </CardContent>
           <CardActions>
