@@ -1,4 +1,4 @@
-import { Add } from "@mui/icons-material";
+import { Add, AddBox, Delete, Edit } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -6,6 +6,7 @@ import {
   CardActions,
   CardContent,
   Grid,
+  IconButton,
   Typography,
 } from "@mui/material";
 
@@ -47,12 +48,15 @@ const PostePage = () => {
             >
               <hr />
             </Typography>
-            <CardActions style={{ padding: 0 }}>
-              <Button fullWidth startIcon={<Add />} variant="contained">
-                solucionar
+            <CardActions style={{ padding: 0, justifyContent: "right" }}>
+              <Button fullWidth variant="contained">
+                <Delete />
               </Button>
-              <Button fullWidth startIcon={<Add />} variant="contained">
-                añadir
+              <Button fullWidth variant="contained">
+                <Edit />
+              </Button>
+              <Button fullWidth variant="contained">
+                <Add />
               </Button>
             </CardActions>
           </CardContent>
