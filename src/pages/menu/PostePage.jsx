@@ -1,3 +1,4 @@
+import { Add } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -11,28 +12,35 @@ import {
 const PostePage = () => {
   return (
     <Grid container>
-      postes en mapa por sectores,
       <Card variant="outlined">
         {" "}
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Word of the Day
+            Registrados
           </Typography>
-          <Typography variant="h5" component="div">
-            belent
+          <Typography
+            variant="h2"
+            fontWeight={"bold"}
+            color="text.secondary"
+            component="div"
+          >
+            2145
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
+            Postes
           </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <hr />
           </Typography>
+          <CardActions style={{ padding: 0 }}>
+            <Button fullWidth startIcon={<Add />} variant="contained">
+              solucionar
+            </Button>
+            <Button fullWidth startIcon={<Add />} variant="contained">
+              añadir
+            </Button>
+          </CardActions>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </Grid>
   );
