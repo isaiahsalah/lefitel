@@ -1,0 +1,51 @@
+:root {
+  --color-gray: #d1d9e2;
+
+  --fuente-principal: 'Arial', sans-serif;
+}
+#root {
+  padding:0;
+ min-height: 100vh;
+  margin: 0 auto;
+  
+  text-align: center;
+  width: 100vw;
+  height: 100%;
+
+background-color:  var(--color-gray);
+}
+main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1280px;
+  padding: 50px;
+}
+.leaflet-container{
+  width: 100%;
+  height: 500px;
+  max-height: 100vh;
+}
+.MuiGrid-container{
+  align-items: center;
+  justify-content: center;
+  margin: 12px;
+
+}
+.MuiGrid-root{
+  padding: 3px;
+}
+.login-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.evento-page{
+}
+.login-page{
+  height: 100vh;
+  background-color: white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+}
