@@ -9,6 +9,8 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { columnsData, rowsData } from "../../data/example";
+import { DataGrid } from "@mui/x-data-grid";
 
 const PostePage = () => {
   return (
@@ -60,6 +62,41 @@ const PostePage = () => {
               </Button>
             </CardActions>
           </CardContent>
+        </Card>
+      </Grid>
+      <Grid item xs={12}>
+        <Card variant="outlined" style={{}}>
+          <CardContent style={{}}>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              Detalle
+              <hr />
+            </Typography>
+            <Box>
+              <DataGrid
+                className="datagrid-content"
+                rowHeight={34}
+                rows={rowsData}
+                columns={columnsData}
+                initialState={{
+                  pagination: {
+                    paginationModel: {
+                      pageSize: 7,
+                    },
+                  },
+                }}
+                pageSizeOptions={[7]}
+                checkboxSelection
+                disableRowSelectionOnClick
+              />
+            </Box>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
         </Card>
       </Grid>
     </Grid>
