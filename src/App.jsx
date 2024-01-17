@@ -1,10 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Outlet,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { Navigate, Outlet, Route, Routes, HashRouter } from "react-router-dom";
 import "./App.css";
 import { SnackbarProvider } from "notistack";
 import { SesionContext, SesionProvider } from "./providers/SesionProvider";
@@ -33,14 +27,14 @@ function App() {
         <ThemeProvider theme={lightTheme}>
           {/* Establece los estilos base para la aplicación */}
           <CssBaseline />
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               <Route element={<PrivateRoutes />}>
                 <Route path="/*" element={<HomePage />} />
               </Route>
               <Route path="/login" element={<LoginPage />} />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </ThemeProvider>
       </SnackbarProvider>
     </SesionProvider>
