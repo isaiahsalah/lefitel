@@ -155,9 +155,6 @@ const EventoPage = () => {
               />
             </Box>
           </CardContent>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
         </Card>
       </Grid>
       <Grid item xs={12}>

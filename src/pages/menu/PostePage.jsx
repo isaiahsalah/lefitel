@@ -14,9 +14,12 @@ import { DataGrid } from "@mui/x-data-grid";
 
 const PostePage = () => {
   return (
-    <Grid container>
-      <Grid item xs={12} md={4}>
-        <Card variant="outlined">
+    <Grid container alignItems={"stretch"}>
+      <Grid display={"flex"} flexDirection={"column"} item xs={12} md={4}>
+        <Card
+          style={{ flex: 1, display: "flex", flexDirection: "column" }}
+          variant="outlined"
+        >
           {" "}
           <CardContent
             style={{ display: "flex", flexDirection: "column", flex: 1 }}
@@ -64,7 +67,7 @@ const PostePage = () => {
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={8}>
         <Card variant="outlined" style={{}}>
           <CardContent style={{}}>
             <Typography
