@@ -22,6 +22,9 @@ import {
   BarChart,
   Settings,
   ExitToAppRounded,
+  Dashboard,
+  WifiTetheringError,
+  CellTower,
 } from "@mui/icons-material";
 import EventoPage from "../pages/menu/EventoPage";
 import { useContext, useState } from "react";
@@ -39,16 +42,22 @@ import {
   DialogTitle,
   Grid,
 } from "@mui/material";
+import InicioPage from "../pages/menu/InicioPage";
 
 const MenuListGeneral = [
   {
+    text: "Inicio",
+    icon: <Dashboard />,
+    route: <InicioPage />,
+  },
+  {
     text: "Postes",
-    icon: <Wifi />,
+    icon: <CellTower />,
     route: <PostePage />,
   },
   {
     text: "Eventos",
-    icon: <WifiOff />,
+    icon: <WifiTetheringError />,
     route: <EventoPage />,
   },
   {
@@ -166,7 +175,7 @@ const DrawerComponent = () => {
   };
 
   return (
-    <Box className="box-main" sx={{ display: "flex" }}>
+    <Box className="box-main" sx={{ display: "flex", minHeight: "100vh" }}>
       <CssBaseline />
       <AppBar position="fixed" open={openMenu}>
         <Toolbar>

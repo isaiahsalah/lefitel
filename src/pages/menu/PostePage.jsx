@@ -11,10 +11,14 @@ import {
 } from "@mui/material";
 import { columnsData, rowsData } from "../../data/example";
 import { DataGrid } from "@mui/x-data-grid";
+import TabsComponent from "../../components/TabsComponent";
 
 const PostePage = () => {
   return (
     <Grid container alignItems={"stretch"}>
+      <TabsComponent
+        items={[{ title: "uno" }, { title: "dos" }, { title: "tres" }]}
+      />
       <Grid display={"flex"} flexDirection={"column"} item xs={12} md={4}>
         <Card
           style={{ flex: 1, display: "flex", flexDirection: "column" }}

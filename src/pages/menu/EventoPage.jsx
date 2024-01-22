@@ -2,19 +2,27 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { Icon } from "leaflet";
 import { LineChart } from "@mui/x-charts/LineChart";
-import { DataGrid } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarFilterButton,
+  useGridApiContext,
+  useGridRootProps,
+} from "@mui/x-data-grid";
 
 import errorPng from "../../assets/images/error.png";
 import {
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,
   Grid,
   Typography,
 } from "@mui/material";
-import { Add, WhereToVote } from "@mui/icons-material";
+import { Add, Edit, EmojiObjects, WhereToVote } from "@mui/icons-material";
 import {
   columnsData,
   markersData,
@@ -23,141 +31,168 @@ import {
   timeData,
   uData,
 } from "../../data/example";
+import { useCallback, useState } from "react";
+import { useDemoData } from "@mui/x-data-grid-generator";
+import { GridToolbar } from "@mui/x-data-grid";
+
 const customIcon = new Icon({
   iconUrl: errorPng,
   iconSize: [28, 28],
 });
-const EventoPage = () => {
+
+// eslint-disable-next-line react/prop-types
+function GridCustomToolbar({ syncState }) {
+  const rootProps = useGridRootProps();
+  const apiRef = useGridApiContext();
+
   return (
-    <Grid container alignItems={"stretch"} className="evento-page">
-      <Grid display={"flex"} flexDirection={"column"} item xs={12} md={4}>
+    <GridToolbarContainer>
+      <GridToolbarFilterButton />
+      <GridToolbarDensitySelector />
+      <Button
+        size="small"
+        startIcon={<rootProps.slots.columnSelectorIcon />}
+        onClick={() => syncState(apiRef.current.exportState())}
+        {...rootProps.slotProps?.baseButton}
+      >
+        Recreate the 2nd grid
+      </Button>
+    </GridToolbarContainer>
+  );
+}
+
+const EventoPage = () => {
+  const { data, loading } = useDemoData({
+    dataSet: "Commodity",
+    rowLength: 100,
+    maxColumns: 6,
+  });
+  const [savedState, setSavedState] = useState({
+    count: 0,
+    initialState: data.initialState,
+  });
+
+  const syncState = useCallback((newInitialState) => {
+    setSavedState((prev) => ({
+      ...prev,
+      count: prev.count + 1,
+      initialState: newInitialState,
+    }));
+  }, []);
+  return (
+    <Grid
+      container
+      sx={{ height: { md: "calc(100% - 76px)" } }}
+      alignItems={"stretch"}
+      className="evento-page"
+    >
+      <Grid display={"flex"} flexDirection={"column"} item xs={12} md={3}>
         <Card
-          style={{ flex: 1, display: "flex", flexDirection: "column" }}
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+          }}
           variant="outlined"
         >
           <CardContent
-            style={{ display: "flex", flexDirection: "column", flex: 1 }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flex: 1,
+              gap: 12,
+            }}
           >
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              Pendientes
-              <hr />
-            </Typography>
-
-            <Grid container flexDirection={"column"} margin={0} flex={1}>
-              <Typography
-                variant="h1"
-                fontWeight={"bold"}
-                color="text.secondary"
-                component="div"
-              >
-                513
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                postes
-              </Typography>
-            </Grid>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              <hr />
-            </Typography>
-            <CardActions style={{ padding: 0 }}>
-              <Button fullWidth startIcon={<Add />} variant="contained">
-                solucionar
-              </Button>
-              <Button fullWidth startIcon={<Add />} variant="contained">
-                añadir
-              </Button>
-            </CardActions>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12} md={8}>
-        <Card variant="outlined">
-          {" "}
-          <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              Histórico
-            </Typography>
-            <hr />
-            <LineChart
-              height={300}
-              series={[
-                { data: pData, label: "pv", id: "pvId" },
-                { data: uData, label: "uv", id: "uvId" },
-              ]}
-              xAxis={[
-                {
-                  scaleType: "time",
-                  data: timeData,
-                  min: timeData[0].getTime(),
-                  max: timeData[timeData.length - 1].getTime(),
-                },
-              ]}
-              sx={{
-                ".MuiLineElement-root, .MuiMarkElement-root": {
-                  strokeWidth: 1,
-                },
-                ".MuiLineElement-series-pvId": {
-                  strokeDasharray: "5 5",
-                },
-                ".MuiLineElement-series-uvId": {
-                  strokeDasharray: "3 4 5 2",
-                },
-                ".MuiMarkElement-root:not(.MuiMarkElement-highlighted)": {
-                  fill: "#fff",
-                },
-                "& .MuiMarkElement-highlighted": {
-                  stroke: "none",
-                },
+            <CardActions
+              style={{
+                padding: 0,
+                display: "flex",
+                alignItems: "start",
               }}
-            />
+            >
+              <Grid margin={0} flex={1} textAlign={"left"} padding={0}>
+                <Typography
+                  display={"flex"}
+                  variant="h5"
+                  fontWeight={"bold"}
+                  color="text.secondary"
+                  lineHeight={1}
+                >
+                  513
+                </Typography>
+                <Typography
+                  lineHeight={1}
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                >
+                  eventos sin resolver
+                </Typography>
+              </Grid>
+              <ButtonGroup
+                size="small"
+                variant="outlined"
+                aria-label="outlined primary button group"
+              >
+                <Button>
+                  <EmojiObjects />
+                </Button>
+                <Button>
+                  <Edit />
+                </Button>
+                <Button>
+                  <Add />
+                </Button>
+              </ButtonGroup>
+            </CardActions>
+
+            <Card
+              style={{ flex: 1, display: "flex", flexDirection: "column" }}
+              variant="outlined"
+            >
+              <CardContent
+                style={{ display: "flex", flexDirection: "column", flex: 1 }}
+              >
+                <Grid container flexDirection={"column"} margin={0} flex={1}>
+                  <Typography
+                    variant="h5"
+                    fontWeight={"bold"}
+                    color="text.secondary"
+                    component="div"
+                  >
+                    Detalle
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    poste
+                  </Typography>
+                </Grid>
+              </CardContent>
+            </Card>
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={12}>
-        <Card variant="outlined" style={{}}>
+
+      <Grid display={"flex"} flexDirection={"column"} item xs={12} md={9}>
+        <Card sx={{ flex: 1 }} variant="outlined" style={{}}>
           <CardContent style={{}}>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              Detalle
-              <hr />
-            </Typography>
-            <Box>
+            <Box sx={{ height: "calc(100vh - 145px)" }}>
               <DataGrid
+                {...data}
                 className="datagrid-content"
-                rowHeight={34}
-                rows={rowsData}
-                columns={columnsData}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 7,
-                    },
-                  },
-                }}
-                pageSizeOptions={[7]}
+                experimentalFeatures={{ lazyLoading: true }}
+                rowsLoadingMode="server"
+                rowCount
+                hideFooterPagination
+                rowHeight={38}
                 checkboxSelection
                 disableRowSelectionOnClick
+                slots={{ toolbar: GridToolbar }}
+                slotProps={{ toolbar: { syncState, showQuickFilter: true } }}
               />
             </Box>
           </CardContent>
         </Card>
       </Grid>
-      <Grid item xs={12}>
+      {/*<Grid item xs={12}>
         <Card variant="outlined">
           {" "}
           <CardContent>
@@ -167,7 +202,6 @@ const EventoPage = () => {
               gutterBottom
             >
               Eventos Pendientes en mapa
-              <hr />
             </Typography>
             <MapContainer center={[-17.82594, -63.166498]} zoom={6}>
               <TileLayer url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png" />
@@ -194,7 +228,7 @@ const EventoPage = () => {
             <Button size="small">Learn More</Button>
           </CardActions>
         </Card>
-      </Grid>
+      </Grid>*/}
     </Grid>
   );
 };

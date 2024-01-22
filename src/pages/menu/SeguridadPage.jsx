@@ -10,8 +10,24 @@ import {
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { columnsData, rowsData } from "../../data/example";
+import { GridToolbar } from "@mui/x-data-grid";
+import { useDemoData } from "@mui/x-data-grid-generator";
+import { useMemo } from "react";
+const VISIBLE_FIELDS = ["name", "rating", "country", "dateCreated", "isAdmin"];
 
 const SeguridadPage = () => {
+  const { data } = useDemoData({
+    dataSet: "Employee",
+    visibleFields: VISIBLE_FIELDS,
+    rowLength: 100,
+  });
+
+  // Otherwise filter will be applied on fields such as the hidden column id
+  const columns = useMemo(
+    () =>
+      data.columns.filter((column) => VISIBLE_FIELDS.includes(column.field)),
+    [data.columns]
+  );
   return (
     <Grid container>
       <Grid item xs={12}>
@@ -28,19 +44,17 @@ const SeguridadPage = () => {
             <Box>
               <DataGrid
                 className="datagrid-content"
-                rowHeight={34}
-                rows={rowsData}
-                columns={columnsData}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 7,
-                    },
+                {...data}
+                disableColumnFilter
+                disableColumnSelector
+                disableDensitySelector
+                columns={columns}
+                slots={{ toolbar: GridToolbar }}
+                slotProps={{
+                  toolbar: {
+                    showQuickFilter: true,
                   },
                 }}
-                pageSizeOptions={[7]}
-                checkboxSelection
-                disableRowSelectionOnClick
               />
             </Box>
           </CardContent>
