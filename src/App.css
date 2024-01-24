@@ -1,17 +1,12 @@
 :root {
   --color-gray: #d1d9e2;
-
   --fuente-principal: 'Arial', sans-serif;
 }
 #root {
   padding:0;
- min-height: 100vh;
   margin: 0 auto;
-  
   text-align: center;
   width: 100vw;
-  height: 100%;
-
 background-color:  var(--color-gray);
 }
 main{
@@ -20,6 +15,7 @@ main{
   justify-content: center;
   max-width: 1280px;
   padding: 50px;
+
 }
 .leaflet-container{
   width: 100%;
@@ -46,6 +42,23 @@ main{
 .evento-page{
 }
 
+img{
+  filter: grayscale(1) opacity(0.7);
+}
+.MuiGrid-root::-webkit-scrollbar {
+  width: 0;
+}
+
+.MuiGrid-root::-webkit-scrollbar{
+  width: 0px;
+  background: #bebebe;
+}
+.MuiGrid-root::-webkit-scrollbar-thumb{
+  background: #616161;
+
+  border-radius: 0px;
+  
+}
 
 
 @media screen and (max-width: 599px) {
