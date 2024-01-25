@@ -129,48 +129,6 @@ const EventoPage = () => {
               gap: 12,
             }}
           >
-            <CardActions
-              style={{
-                padding: 0,
-                display: "flex",
-                alignItems: "start",
-              }}
-            >
-              <Grid margin={0} flex={1} textAlign={"left"} padding={0}>
-                <Typography
-                  display={"flex"}
-                  variant="h5"
-                  fontWeight={"bold"}
-                  color="text.secondary"
-                  lineHeight={1}
-                >
-                  513
-                </Typography>
-                <Typography
-                  lineHeight={1}
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
-                >
-                  eventos sin resolver
-                </Typography>
-              </Grid>
-              <ButtonGroup
-                size="small"
-                variant="outlined"
-                aria-label="outlined primary button group"
-              >
-                <Button>
-                  <EmojiObjects />
-                </Button>
-                <Button>
-                  <Edit />
-                </Button>
-                <Button>
-                  <Add />
-                </Button>
-              </ButtonGroup>
-            </CardActions>
-
             <Grid
               component={Card}
               sx={{
@@ -255,7 +213,6 @@ const EventoPage = () => {
                     <Typography
                       display={"flex"}
                       color="text.secondary"
-                      variant="p"
                       textAlign={"left"}
                     >
                       Imagen:

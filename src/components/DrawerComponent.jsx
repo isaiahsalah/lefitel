@@ -177,7 +177,7 @@ const DrawerComponent = () => {
   return (
     <Box className="box-main" sx={{ display: "flex", minHeight: "100vh" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={openMenu}>
+      <AppBar variant="outlined" elevation={0} position="fixed" open={openMenu}>
         <Toolbar>
           <IconButton
             color="inherit"

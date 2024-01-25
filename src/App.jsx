@@ -43,6 +43,24 @@ const lightTheme = createTheme(
       mode: "light",
       primary: { main: "#596BAB" },
     },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: "capitalize",
+          },
+        },
+      },
+      MuiTextField: {
+        defaultProps: {
+          variant: "filled",
+        },
+        styleOverrides: {},
+      },
+      MuiTypography: {
+        defaultProps: {},
+      },
+    },
   },
   dataGridEs,
   coreEs,

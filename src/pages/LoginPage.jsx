@@ -1,4 +1,10 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import logo from "../assets/images/logo.png";
 import { useContext, useEffect, useState } from "react";
 import { SesionContext } from "../providers/SesionProvider";
@@ -6,7 +12,12 @@ import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../components/LoadingComponent";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { KeyboardArrowRight } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Key,
+  KeyboardArrowRight,
+  Person,
+} from "@mui/icons-material";
 
 const LoginPage = () => {
   const { setSesion } = useContext(SesionContext);
@@ -61,18 +72,15 @@ const LoginPage = () => {
             <Typography variant="h2" lineHeight={0.7}>
               Lefitel
             </Typography>
-            <Typography variant="p" lineHeight={0.7}>
-              srl
-            </Typography>
+            <Typography lineHeight={0.7}>srl</Typography>
           </Grid>
         </Grid>
+        <hr />
         <Grid container flexDirection={"column"} gap={1}>
           <TextField
             fullWidth
-            id="filled-error-helper-text"
             label="Usuario"
             //helperText="Usuario"
-            variant="filled"
             inputProps={{ style: { textAlign: "center" } }}
             onChange={(e) => setLogin({ ...login, user: e.target.value })}
             onKeyDown={(event) => {
@@ -80,15 +88,30 @@ const LoginPage = () => {
                 ValidarDatos();
               }
             }}
+            InputProps={{
+              style: { textAlign: "center" },
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Person />
+                </InputAdornment>
+              ),
+            }}
           />
+
           <TextField
             fullWidth
             //error
-            id="filled-error-helper-text"
             label="Contraseña"
             //helperText="Incorrect entry."
-            variant="filled"
             inputProps={{ style: { textAlign: "center" } }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Key />
+                </InputAdornment>
+              ),
+            }}
+            type="password"
             onChange={(e) => setLogin({ ...login, password: e.target.value })}
             onKeyDown={(event) => {
               if (event.key === "Enter") {
