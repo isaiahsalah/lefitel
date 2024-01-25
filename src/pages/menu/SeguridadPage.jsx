@@ -16,7 +16,7 @@ import { useDemoData } from "@mui/x-data-grid-generator";
 import { useMemo, useState } from "react";
 import FullDialogComponent from "../../components/FullDialogComponent";
 import AddUserDialog from "../../components/dialogs/AddUserDialog";
-import SeguridadSec from "./seguridad/SeguridadSec.JSX";
+import SeguridadSec from "./seguridad/SeguridadSec";
 import SeguridadDetalleSec from "./seguridad/SeguridadDetalleSec";
 const VISIBLE_FIELDS = ["name", "rating", "country", "dateCreated", "isAdmin"];
 
