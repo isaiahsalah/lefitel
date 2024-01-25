@@ -41,6 +41,7 @@ export const rowsData = [
   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
+export const ubicacionExample = [-17.82594, -63.166498];
 
 export const markersData = [
   [-17.82594, -63.166498],
@@ -64,3 +65,27 @@ export const timeData = [
   new Date(2015, 6, 0),
   new Date(2015, 7, 0),
 ];
+/*
+export const columnsExample = [
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "name", headerName: "Name", width: 150 },
+  { field: "age", headerName: "Age", width: 70 },
+  // Nueva columna con botones
+  {
+    field: "actions",
+    headerName: "Actions",
+    width: 150,
+    renderCell: (params) => (
+      <div>
+        <button onClick={() => {}}>Editar</button>
+        <button onClick={() => {}}>Eliminar</button>
+      </div>
+    ),
+  },
+];
+
+export const rowsExample = [
+  { id: 1, name: "John Doe", age: 25 },
+  { id: 2, name: "Jane Doe", age: 30 },
+  // ...otros datos
+];*/

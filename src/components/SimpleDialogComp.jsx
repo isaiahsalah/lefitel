@@ -4,6 +4,10 @@ import {
   Box,
   Button,
   Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   Grid,
   IconButton,
@@ -24,7 +28,7 @@ export const TransitionDialog = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FullDialogComponent = ({ label, icon, content }) => {
+const SimpleDialogComponent = ({ label, icon, content, title }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -42,36 +46,27 @@ const FullDialogComponent = ({ label, icon, content }) => {
       </Button>
       <Dialog
         fullWidth
+        keepMounted
         open={open}
         onClose={handleClose}
         TransitionComponent={TransitionDialog}
       >
-        <AppBar sx={{ position: "relative" }} variant="outlined" elevation={0}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <Close />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {label}
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Guardar
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Box m={1}>{content}</Box>
+        <DialogTitle>{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>{content} </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Ok</Button>
+        </DialogActions>
       </Dialog>
     </React.Fragment>
   );
 };
-FullDialogComponent.propTypes = {
+SimpleDialogComponent.propTypes = {
   label: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+
   icon: PropTypes.element.isRequired,
   content: PropTypes.element.isRequired,
 };
-export default FullDialogComponent;
+export default SimpleDialogComponent;

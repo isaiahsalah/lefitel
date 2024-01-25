@@ -88,14 +88,6 @@ const LoginPage = () => {
                 ValidarDatos();
               }
             }}
-            InputProps={{
-              style: { textAlign: "center" },
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Person />
-                </InputAdornment>
-              ),
-            }}
           />
 
           <TextField
@@ -104,13 +96,6 @@ const LoginPage = () => {
             label="Contraseña"
             //helperText="Incorrect entry."
             inputProps={{ style: { textAlign: "center" } }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Key />
-                </InputAdornment>
-              ),
-            }}
             type="password"
             onChange={(e) => setLogin({ ...login, password: e.target.value })}
             onKeyDown={(event) => {

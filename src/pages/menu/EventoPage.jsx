@@ -37,14 +37,7 @@ import {
   EmojiObjects,
   WhereToVote,
 } from "@mui/icons-material";
-import {
-  columnsData,
-  markersData,
-  pData,
-  rowsData,
-  timeData,
-  uData,
-} from "../../data/example";
+
 import { useCallback, useState } from "react";
 import { useDemoData } from "@mui/x-data-grid-generator";
 import { GridToolbar } from "@mui/x-data-grid";

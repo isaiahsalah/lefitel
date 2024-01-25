@@ -10,17 +10,30 @@ import {
   Checkbox,
   FormControlLabel,
   Grid,
+  Input,
   TextField,
   Typography,
 } from "@mui/material";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { customIcon } from "../assets/PinMap";
+import { customIcon } from "../../assets/PinMap";
+import { useState } from "react";
+const ubicaion = [-17.82594, -63.166498];
 
-const AddPosteComponent = () => {
+const EditPosteDialog = () => {
+  const [image, setImage] = useState(
+    "https://i.pinimg.com/736x/ca/64/b1/ca64b142e07ff2ffbfc41b0be1796d8b.jpg"
+  );
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
   return (
     <Grid container width={1} m={0}>
       <Grid item xs={12} md={4}>
         <TextField
+          disabled
           fullWidth
           style={{
             padding: 0,
@@ -201,24 +214,16 @@ const AddPosteComponent = () => {
         </Grid>
         <Grid item xs={12}>
           <MapContainer
-            center={[-17.82594, -63.166498]}
-            zoom={6}
+            center={ubicaion}
+            zoom={13}
             style={{ height: "220px" }}
             scrollWheelZoom={false}
           >
             <TileLayer url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png" />
-            <Marker position={[-17.82594, -63.166498]} icon={customIcon}>
+            <Marker position={ubicaion} icon={customIcon}>
               <Popup>
                 <Grid container flexDirection={"column"} gap={1}>
-                  Este es un popup del marker
-                  <Button
-                    size="small"
-                    startIcon={<WhereToVote />}
-                    variant="contained"
-                    fullWidth
-                  >
-                    solucionar
-                  </Button>
+                  {ubicaion}
                 </Grid>
               </Popup>
             </Marker>
@@ -235,7 +240,7 @@ const AddPosteComponent = () => {
         md={6}
         paddingBlock={1}
       >
-        <Grid>
+        <Grid display={"flex"} justifyContent={"space-between"}>
           <Typography
             display={"flex"}
             color="text.secondary"
@@ -244,6 +249,7 @@ const AddPosteComponent = () => {
           >
             Imagen:
           </Typography>
+          <Input fullWidth onChange={onImageChange} type={"file"} />
         </Grid>
 
         <img
@@ -253,7 +259,7 @@ const AddPosteComponent = () => {
             objectFit: "cover",
             borderRadius: 4,
           }}
-          src={`https://i.pinimg.com/564x/d2/d3/a9/d2d3a9174b19ddd1dad2603e142b058c.jpg`}
+          src={image}
           alt={"imagen"}
           loading="lazy"
         />
@@ -262,4 +268,4 @@ const AddPosteComponent = () => {
   );
 };
 
-export default AddPosteComponent;
+export default EditPosteDialog;

@@ -14,6 +14,8 @@ import {
 import { esES as dataGridEs } from "@mui/x-data-grid";
 import { esES as coreEs } from "@mui/material/locale";
 import { esES as dateEs } from "@mui/x-date-pickers/locales";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const PrivateRoutes = () => {
   const { sesion } = useContext(SesionContext);
@@ -54,11 +56,17 @@ const lightTheme = createTheme(
       MuiTextField: {
         defaultProps: {
           variant: "filled",
+          size: "small",
         },
         styleOverrides: {},
       },
       MuiTypography: {
         defaultProps: {},
+      },
+      MuiCard: {
+        defaultProps: {
+          variant: "outlined",
+        },
       },
     },
   },
@@ -71,20 +79,22 @@ const App = () => {
   return (
     <ChangeThemeProvider>
       <SesionProvider>
-        <SnackbarProvider autoHideDuration={2000} maxSnack={2}>
-          <ThemeProvider theme={lightTheme}>
-            {/* Establece los estilos base para la aplicación */}
-            <CssBaseline />
-            <HashRouter>
-              <Routes>
-                <Route element={<PrivateRoutes />}>
-                  <Route path="/*" element={<HomePage />} />
-                </Route>
-                <Route path="/login" element={<LoginPage />} />
-              </Routes>
-            </HashRouter>
-          </ThemeProvider>
-        </SnackbarProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <SnackbarProvider autoHideDuration={2000} maxSnack={2}>
+            <ThemeProvider theme={lightTheme}>
+              {/* Establece los estilos base para la aplicación */}
+              <CssBaseline />
+              <HashRouter>
+                <Routes>
+                  <Route element={<PrivateRoutes />}>
+                    <Route path="/*" element={<HomePage />} />
+                  </Route>
+                  <Route path="/login" element={<LoginPage />} />
+                </Routes>
+              </HashRouter>
+            </ThemeProvider>
+          </SnackbarProvider>
+        </LocalizationProvider>
       </SesionProvider>
     </ChangeThemeProvider>
   );
