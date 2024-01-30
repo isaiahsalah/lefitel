@@ -1,9 +1,37 @@
-import { Box, LinearProgress } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  LinearProgress,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Close } from "@mui/icons-material";
+import EditEventoDialog from "../../../../components/dialogs/EditEventoDialog";
+import { TransitionDialog } from "../../../../components/FullDialogComponent";
 
-const PosteDetalleEventoSec = ({ data, handleClickOpen }) => {
+const PosteDetalleEventoSec = ({ data }) => {
+  const [open, setOpen] = useState(false);
+  const [evento, setevento] = useState(null);
+
+  const handleClickOpen = (rows) => {
+    setevento(rows);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box
       sx={{
@@ -36,11 +64,18 @@ const PosteDetalleEventoSec = ({ data, handleClickOpen }) => {
         }}
         hideFooter
       />
+      <Dialog
+        fullWidth
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={TransitionDialog}
+      >
+        <EditEventoDialog evento={evento} setevento={setevento} />
+      </Dialog>
     </Box>
   );
 };
 PosteDetalleEventoSec.propTypes = {
-  handleClickOpen: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 };
 

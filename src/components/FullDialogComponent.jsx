@@ -46,25 +46,7 @@ const FullDialogComponent = ({ label, icon, content }) => {
         onClose={handleClose}
         TransitionComponent={TransitionDialog}
       >
-        <AppBar sx={{ position: "relative" }} variant="outlined" elevation={0}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <Close />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {label}
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Guardar
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Box m={1}>{content}</Box>
+        {content}
       </Dialog>
     </React.Fragment>
   );

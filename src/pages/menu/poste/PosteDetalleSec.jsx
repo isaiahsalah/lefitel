@@ -37,23 +37,11 @@ import SimpleDialogComponent from "../../../components/SimpleDialogComp";
 import InfoPosteDetalleDialog from "../../../components/dialogs/InfoPosteDetalleDialog";
 
 const PosteDetalleSec = ({ poste, setposte }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = (rows) => {
-    setevento(rows);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const { data } = useDemoData({
     dataSet: "Commodity",
     rowLength: 100,
   });
   const [value, setValue] = useState(0);
-  const [evento, setevento] = useState(null);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -160,44 +148,12 @@ const PosteDetalleSec = ({ poste, setposte }) => {
                 <PosteDetalleDataSec poste={poste} />
               </CustomTabComponent>
               <CustomTabComponent value={value} index={1}>
-                <PosteDetalleEventoSec
-                  data={data}
-                  handleClickOpen={handleClickOpen}
-                />
+                <PosteDetalleEventoSec data={data} />
               </CustomTabComponent>
             </Box>
           </CardContent>
         </Card>
       </Grid>
-
-      <Dialog
-        fullWidth
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={TransitionDialog}
-      >
-        <AppBar sx={{ position: "relative" }} variant="outlined" elevation={0}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <Close />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Editar Evento
-            </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
-              Guardar
-            </Button>
-          </Toolbar>
-        </AppBar>
-        <Box m={1}>
-          <EditEventoDialog evento={evento} setevento={setevento} />
-        </Box>
-      </Dialog>
     </Grid>
   );
 };

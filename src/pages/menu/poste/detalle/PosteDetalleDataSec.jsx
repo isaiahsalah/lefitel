@@ -114,7 +114,7 @@ const PosteDetalleDataSec = ({ poste }) => {
               <MapContainer
                 center={ubicacionExample}
                 zoom={13}
-                style={{ height: { xs: "400px", md: "calc(100vh - 470px)" } }}
+                style={{ height: "calc(100vh - 480px)" }}
                 scrollWheelZoom={false}
               >
                 <TileLayer url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png" />
